@@ -13,3 +13,37 @@ Funcionalidades del simulador:
 -Operaciones con líneas: Agregar o eliminar líneas de la red, asegurándose de que todas las líneas estén conectadas si hay más de una.
 -Información de la red: Obtener datos como el número de líneas en la red o el número de estaciones en una línea.
 -Simulación de tránsito: Calcular el tiempo que le toma a un tren viajar de una estación a otra dentro de la misma línea. 
+
+
+Diseño
+
+-Clase Estación:
+  Atributos:
+    Nombre
+    Tiempo de llegada a la siguiente estación en la misma línea
+    Tipo de estación (normal o de transferencia)
+  Métodos:
+    Constructor(es) y destructor
+    Getters y setters para los atributos
+    Método para determinar si es una estación de transferencia
+
+-Clase Línea:
+  Atributos:
+    Nombre
+    Lista de estaciones en orden
+  Métodos:
+    Constructor(es) y destructor
+    Getters y setters para los atributos
+    Métodos para agregar y eliminar estaciones en los extremos e intermedios
+    Método para obtener el número de estaciones en la línea
+    Método para verificar si una estación pertenece a la línea
+
+-Clase RedMetro:
+  Atributos:
+    Lista de líneas en la red
+  Métodos:
+    Constructor(es) y destructor
+    Métodos para agregar y eliminar líneas
+    Método para obtener el número de líneas en la red
+    Método para obtener el número total de estaciones en la red, considerando las estaciones de transferencia
+    Método para simular el tiempo de llegada de un tren entre estaciones en la misma línea
