@@ -1,0 +1,15 @@
+Analisis del problema
+
+Conceptos clave:
+
+-Red de Metro: Representa el sistema completo de transporte, compuesto por varias líneas que conectan distintas estaciones.
+-Líneas: Cada línea es una ruta específica dentro de la red que conecta una serie de estaciones en un orden determinado.
+-Estaciones: Son los puntos de parada para los pasajeros. Algunas estaciones funcionan como puntos de transferencia entre líneas.
+
+Funcionalidades del simulador:
+
+-Modelado de la red: Crear una estructura que represente todas las líneas y estaciones, incluyendo las transferencias.
+-Operaciones con estaciones: Agregar o eliminar estaciones de las líneas, con consideraciones especiales para las estaciones de transferencia.
+-Operaciones con líneas: Agregar o eliminar líneas de la red, asegurándose de que todas las líneas estén conectadas si hay más de una.
+-Información de la red: Obtener datos como el número de líneas en la red o el número de estaciones en una línea.
+-Simulación de tránsito: Calcular el tiempo que le toma a un tren viajar de una estación a otra dentro de la misma línea. 
