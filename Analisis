@@ -4,7 +4,12 @@ Conceptos clave:
 
 -Red de Metro: Representa el sistema completo de transporte, compuesto por varias líneas que conectan distintas estaciones.
 -Líneas: Cada línea es una ruta específica dentro de la red que conecta una serie de estaciones en un orden determinado.
+      Cada línea tiene un nombre y se especifica si es un tren o un tranvía. La secuencia de estaciones que comunica es importante 
+      para determinar las conexiones entre las estaciones.
 -Estaciones: Son los puntos de parada para los pasajeros. Algunas estaciones funcionan como puntos de transferencia entre líneas.
+      Cada estación tiene un nombre único. Además, necesitas almacenar información sobre el tiempo que toma viajar entre estaciones 
+      adyacentes en la misma línea. Algunas estaciones son estaciones de transferencia, lo que significa que conectan dos líneas 
+      diferentes. Necesitarás identificar estas estaciones y sus conexiones con otras líneas.
 
 Funcionalidades del simulador:
 
@@ -19,31 +24,67 @@ Diseño
 
 -Clase Estación:
   Atributos:
-    Nombre
-    Tiempo de llegada a la siguiente estación en la misma línea
-    Tipo de estación (normal o de transferencia)
+   ○ Nombre
+   ○ Tiempo de llegada a la siguiente estación en la misma línea
+   ○ Tipo de estación (normal o de transferencia)
   Métodos:
-    Constructor(es) y destructor
-    Getters y setters para los atributos
-    Método para determinar si es una estación de transferencia
+   ○ Constructor(es) y destructor
+   ○ Getters y setters para los atributos
+   ○ Método para determinar si es una estación de transferencia
 
 -Clase Línea:
   Atributos:
-    Nombre
-    Lista de estaciones en orden
+   ○ Nombre
+   ○ Lista de estaciones en orden
   Métodos:
-    Constructor(es) y destructor
-    Getters y setters para los atributos
-    Métodos para agregar y eliminar estaciones en los extremos e intermedios
-    Método para obtener el número de estaciones en la línea
-    Método para verificar si una estación pertenece a la línea
+   ○ Constructor(es) y destructor
+   ○ Getters y setters para los atributos
+   ○ Métodos para agregar y eliminar estaciones en los extremos e intermedios
+   ○ Método para obtener el número de estaciones en la línea
+   ○ Método para verificar si una estación pertenece a la línea
 
 -Clase RedMetro:
   Atributos:
-    Lista de líneas en la red
+   ○ Lista de líneas en la red
   Métodos:
-    Constructor(es) y destructor
-    Métodos para agregar y eliminar líneas
-    Método para obtener el número de líneas en la red
-    Método para obtener el número total de estaciones en la red, considerando las estaciones de transferencia
-    Método para simular el tiempo de llegada de un tren entre estaciones en la misma línea
+   ○ Constructor(es) y destructor
+   ○ Métodos para agregar y eliminar líneas
+   ○ Método para obtener el número de líneas en la red
+   ○ Método para obtener el número total de estaciones en la red, considerando las estaciones de transferencia
+
+-Clase ConexionEstacion 
+	- Atributos:
+		○ Estación de origen.
+		○ Estación de destino.
+		○ Tiempo de viaje entre estaciones.
+		○ Indicador de si hay transferencia en la conexión.
+	- Métodos:
+		○ Constructor para inicializar la conexión entre estaciones.
+Razones por las cuales se proponen estas clases 
+
+Clase Estación:
+	- Razón de uso: La clase Estación representa una entidad fundamental en un sistema de metro. 
+    Cada estación tiene atributos como su nombre, las líneas a las que pertenece y si es una estación de transferencia. Esta clase es 
+    necesaria para modelar y gestionar las estaciones individuales dentro de la red de metro.
+Clase Línea:
+	- Razón de uso: La clase Línea representa una línea específica en el sistema de metro, con sus atributos como el nombre, el tipo 
+    de transporte y las estaciones que componen la línea. Esta clase es esencial para organizar y gestionar las estaciones dentro de una 
+    línea, así como para identificar las características específicas de cada línea, como el tipo de transporte utilizado.
+Clase RedMetro:
+	- Razón de uso: La clase RedMetro representa la red de metro en su conjunto. Contiene una lista de todas las líneas que componen la red. 
+    Esta clase es crucial para administrar y coordinar las operaciones en toda la red de metro, como agregar o eliminar líneas, y 
+    proporcionar información sobre la red en su totalidad, como la cantidad de líneas y estaciones.
+Clase ConexionEstacion: 
+	- Razón de uso: La clase ConexionEstacion representa una conexión entre dos estaciones en una línea de metro. 
+    Almacena información sobre la estación de origen, la estación de destino, el tiempo de viaje entre estaciones y si hay una 
+    transferencia en la conexión. Esta clase es útil para calcular el tiempo de llegada entre estaciones en la misma línea y para modelar 
+    las relaciones entre las estaciones en una línea de metro de manera más precisa y eficiente.
+
+
+Para tener en cuenta a la hora de implementar 
+	- Las estaciones de transferencia no se pueden eliminar
+	- No pueden haber líneas aisladas
+	- No puede haber más de una estación de transferencia entre líneas
+	- La documentación debe estar en la versión UML simplificada
+
+
