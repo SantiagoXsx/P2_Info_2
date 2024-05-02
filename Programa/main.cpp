@@ -2,7 +2,7 @@
 #include <string>
 
 using namespace std;
-
+/*
 class Estacion {
 private:
     string nombre;
@@ -47,4 +47,32 @@ int main() {
 
     return 0;
 }
+*/
 
+class Linea {
+    // Suponiendo que la clase Linea ya está definida con sus propios atributos y métodos.
+};
+
+class RedMetro {
+private:
+    Linea lineas;
+public:
+   
+    RedMetro() {}
+
+    
+    ~RedMetro() {
+    }
+
+    void agregarLinea(const Linea& nuevaLinea) {
+    }
+
+    bool eliminarLinea(const Linea& lineaAEliminar) {
+    }
+
+    int obtenerNumeroDeLineas() const {
+    }
+
+    int obtenerNumeroTotalDeEstaciones() const {
+    }
+};
