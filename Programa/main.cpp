@@ -27,6 +27,7 @@ public:
     void setEsTransferencia(bool trans) { esTransferencia = trans; }
 
 
+
     void imprimirInformacion() const {
         cout << "Estación: " << nombre << "\n";
         cout << "Tiempo al siguiente: " << tiempoSiguiente << " segundos\n";
@@ -34,18 +35,6 @@ public:
         cout << "Es transferencia: " << (esTransferencia ? "Sí" : "No") << "\n";
     }
 };
-
-int main() {
-    Estacion estacion1("Poblado", 60, 45, false);
-    Estacion estacion2("Industriales", 70, 60, true);
-
-    cout << "Información de la estación 1:\n";
-    estacion1.imprimirInformacion();
-    cout << "\nInformación de la estación 2:\n";
-    estacion2.imprimirInformacion();
-
-    return 0;
-}
 
 class Linea {
 private:
@@ -105,5 +94,18 @@ public:
 
     int numeroLineas() const {
         return numLineas;
+    }
+    int numeroEstaciones() const {
+        return numEstaciones;
+    }
+
+    int numeroEstacionesTransferencia() const {
+        int count = 0;
+        for (int i = 0; i < numEstaciones; ++i) {
+            if (estaciones[i]->getEsTransferencia()) {
+                count++;
+            }
+        }
+        return count;
     }
 };
