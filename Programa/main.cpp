@@ -108,4 +108,35 @@ public:
         }
         return count;
     }
+
+    void imprimirInformacion() const {
+        cout << "Número de líneas: " << numLineas << "\n";
+        //Siempre da cero porque no hay metodos para agregar estaciones
+        cout << "Número de estaciones: " << numEstaciones << "\n";
+        cout << "Número de estaciones de transferencia: " << numeroEstacionesTransferencia() << "\n";
+    }
 };
+
+int main() {
+
+    RedMetro red;
+
+    red.agregarLinea("Línea 1");
+    red.agregarLinea("Línea 2");
+
+    red.imprimirInformacion();
+
+    Estacion est1("Estación 1", 120, 0, false);
+    Estacion est2("Estación 2", 90, 120, true);
+    Estacion est3("Estación 3", 0, 90, false);
+
+    est1.imprimirInformacion();
+    est2.imprimirInformacion();
+    est3.imprimirInformacion();
+
+    red.eliminarLinea(0);
+
+    red.imprimirInformacion();
+
+    return 0;
+}
