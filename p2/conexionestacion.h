@@ -21,9 +21,9 @@ public:
 
     // Getters y Setters
     string obtenerEstacionOrigen() const;
-    void establecerEstacionOrigen(const std::string& origen);
+    void establecerEstacionOrigen(const string& origen);
     string obtenerEstacionDestino() const;
-    void establecerEstacionDestino(const std::string& destino);
+    void establecerEstacionDestino(const string& destino);
     int obtenerTiempoViaje() const;
     void establecerTiempoViaje(int tiempo);
     bool esTransferencia() const;

@@ -5,12 +5,15 @@
 
 using namespace std;
 
+class Estacion;
+
 class Linea {
 private:
     string nombre;
-    string* estaciones; // Array de strings para almacenar las estaciones
+    Estacion** estaciones;
     int capacidadMaxima; // Capacidad máxima del array
     int cantidadEstaciones; // Cantidad actual de estaciones en la línea
+
 
 public:
     // Constructor
@@ -20,10 +23,10 @@ public:
     ~Linea();
 
     // Método para agregar una estación al final de la línea
-    void agregarEstacion(const string& nombreEstacion);
+    void agregarEstacion(Estacion* estacion);
 
     // Método para eliminar una estación de la línea
-    void eliminarEstacion(const string& nombreEstacion);
+    void eliminarEstacion(Estacion* estacion);
 
     // Método para obtener el nombre de la línea
     string obtenerNombre() const;
@@ -32,7 +35,10 @@ public:
     void imprimirEstaciones() const;
 
     //Método para verificar si una estacion pertenece a una linea
-    bool verificarEstacion(const std::string& nombreEstacion) const;
+    bool verificarEstacion(const string& nombreEstacion) const;
+
+
+
 
 };
 
