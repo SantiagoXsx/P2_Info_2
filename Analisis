@@ -1,26 +1,32 @@
 Analisis del problema
+El problema consiste en desarrollar un simulador de red de metro que permita modelar las características del 
+funcionamiento de este sistema de transporte
 
 Conceptos clave:
 
 -Red de Metro: Representa el sistema completo de transporte, compuesto por varias líneas que conectan distintas estaciones.
 -Líneas: Cada línea es una ruta específica dentro de la red que conecta una serie de estaciones en un orden determinado.
-      Cada línea tiene un nombre y se especifica si es un tren o un tranvía. La secuencia de estaciones que comunica es importante 
-      para determinar las conexiones entre las estaciones.
+      Cada línea tiene un nombre y se especifica si es un tren o un tranvía. La secuencia de estaciones que comunica es 
+      importante para determinar las conexiones entre las estaciones.
 -Estaciones: Son los puntos de parada para los pasajeros. Algunas estaciones funcionan como puntos de transferencia entre líneas.
       Cada estación tiene un nombre único. Además, necesitas almacenar información sobre el tiempo que toma viajar entre estaciones 
       adyacentes en la misma línea. Algunas estaciones son estaciones de transferencia, lo que significa que conectan dos líneas 
-      diferentes. Necesitarás identificar estas estaciones y sus conexiones con otras líneas.
+      diferentes. Necesitaremos identificar estas estaciones y sus conexiones con otras líneas.
 
 Funcionalidades del simulador:
 
 -Modelado de la red: Crear una estructura que represente todas las líneas y estaciones, incluyendo las transferencias.
--Operaciones con estaciones: Agregar o eliminar estaciones de las líneas, con consideraciones especiales para las estaciones de transferencia.
--Operaciones con líneas: Agregar o eliminar líneas de la red, asegurándose de que todas las líneas estén conectadas si hay más de una.
+-Operaciones con estaciones: Agregar o eliminar estaciones de las líneas, con consideraciones especiales para las estaciones de 
+transferencia.
+-Operaciones con líneas: Agregar o eliminar líneas de la red, asegurándose de que todas las líneas estén conectadas si hay más 
+de una.
 -Información de la red: Obtener datos como el número de líneas en la red o el número de estaciones en una línea.
 -Simulación de tránsito: Calcular el tiempo que le toma a un tren viajar de una estación a otra dentro de la misma línea. 
 
 
 Diseño
+Diagrama de clases:
+https://www.canva.com/design/DAGD6KJ8UaI/h1alCBU0f2dR3GuLchKhIw/edit?utm_content=DAGD6KJ8UaI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 -Clase Estación:
   Atributos:
@@ -79,6 +85,64 @@ Clase ConexionEstacion:
     Almacena información sobre la estación de origen, la estación de destino, el tiempo de viaje entre estaciones y si hay una 
     transferencia en la conexión. Esta clase es útil para calcular el tiempo de llegada entre estaciones en la misma línea y para modelar 
     las relaciones entre las estaciones en una línea de metro de manera más precisa y eficiente.
+
+Descripción lógica de las tareas 
+- Agregar una estación a una línea:
+	Verificar si la estación ya existe en la línea para evitar duplicados.
+	Si la estación no existe, agregarla a la lista de estaciones de la línea en la posición especificada.
+	Actualizar la lista de estaciones para reflejar el cambio.
+- Eliminar una estación de una línea:
+	Verificar si la estación existe en la línea.
+	Si la estación existe, eliminarla de la lista de estaciones de la línea.
+	Actualizar la lista de estaciones para reflejar el cambio.
+- Agregar una línea a la red de metro:
+	Verificar si la línea ya existe en la red para evitar duplicados.
+	Si la línea no existe, agregarla a la lista de líneas en la red de metro.
+	Actualizar la lista de líneas para reflejar el cambio.
+- Eliminar una línea de la red de metro:
+	Verificar si la línea existe en la red.
+	Si la línea existe, eliminarla de la lista de líneas en la red de metro.
+	Actualizar la lista de líneas para reflejar el cambio.
+- Calcular el tiempo de llegada de un tren entre estaciones en la misma línea:
+	Utilizar el tiempo de llegada especificado entre estaciones adyacentes en la misma línea.
+	Sumar los tiempos de llegada de todas las estaciones intermedias hasta llegar a la estación de destino.
+
+Problemas de desarrollo que afrontamos 
+- Gestión de memoria: Asegurar la correcta asignación y liberación de memoria para evitar fugas de memoria.
+- Manejo de índices: Garantizar que los índices utilizados estén dentro de los límites válidos para evitar 
+errores de desbordamiento o acceso no válido.
+- Entrada de usuario: Validar la entrada del usuario para evitar errores como desbordamiento de búfer o 
+entrada incorrecta.
+- Diseño de clases: Diseñar clases con responsabilidades claras y relaciones coherentes entre ellas, siguiendo 
+principios de diseño como la encapsulación y la responsabilidad única.
+- Pruebas y depuración: Realizar pruebas exhaustivas y depuración para identificar y corregir errores en el código.
+- Mantenibilidad y escalabilidad: Mantener el código limpio, modular y fácilmente mantenible para facilitar su 
+mantenimiento y escalabilidad a medida que el proyecto crece.
+
+Evolución de la solución y consideraciones para tener en cuenta en la implementación 
+- Cambios en la Clase Estacion:
+Se modificaron los atributos para incluir información adicional sobre las estaciones, como el tiempo de llegada a la estación anterior y el tiempo de llegada a la siguiente estación en la misma línea.
+
+- Cambios en la Clase Linea:
+Se agregaron métodos para permitir la adición y eliminación de estaciones en una línea, así como para verificar si una estación pertenece a la línea.
+Se ajustó el método eliminarEstacion() para corregir un error que causaba la eliminación incorrecta de estaciones en la línea.
+
+- Cambios en la Clase RedMetro:
+Se agregó un método para eliminar líneas de la red de metro, lo que permitió eliminar líneas que ya no eran necesarias.
+Se corrigió un error en el método numeroEstaciones() para que devuelva el número correcto de estaciones en la red.
+
+- Mejoras en la Interfaz de Usuario:
+Se agregaron opciones adicionales al menú principal para permitir la eliminación de líneas de la red de metro.
+Se corrigieron errores en la entrada de usuario para manejar casos excepcionales, como entradas inválidas o fuera de rango.
+
+- Optimizaciones en la Gestión de Memoria:
+Se mejoró la gestión de memoria en las clases RedMetro y Linea para evitar fugas de memoria al eliminar líneas y estaciones.
+Refactorización de Código:
+Se refactorizó el código para mejorar la legibilidad y la estructura del programa, dividiendo las funciones largas en funciones más pequeñas y manejables.
+
+- Mejoras en la Documentación y Comentarios:
+Se agregaron comentarios adicionales en el código para explicar el propósito y el funcionamiento de las diferentes partes del programa.
+Se actualizó la documentación UML para reflejar los cambios realizados en el diseño de las clases y la estructura de la red de metro.
 
 
 Para tener en cuenta a la hora de implementar 
