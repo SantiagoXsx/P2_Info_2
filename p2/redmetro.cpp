@@ -1,4 +1,5 @@
 #include "redmetro.h"
+#include "linea.h"
 
 RedMetro::RedMetro() : estaciones(new Estacion*[MAX_ESTACIONES]), lineas(new Linea*[MAX_LINEAS]), numEstaciones(0), numLineas(0) {}
 
@@ -67,3 +68,45 @@ Linea* RedMetro::obtenerLinea(const string& nombreLinea) const {
     }
     return nullptr; // Si no se encuentra la línea, devolvemos nullptr
 }
+
+int RedMetro::numeroEstacionesEnLinea(const std::string& nombreLinea) const {
+    Linea* linea = obtenerLinea(nombreLinea);
+    if (linea != nullptr) {
+        return linea->numeroEstaciones();
+    } else {
+        return -1; // Retorna -1 si la línea no existe
+    }
+}
+
+int RedMetro::numeroEstacionesUnicas() const {
+    const int MAX_ESTACIONES = 1000; // Tamaño máximo del array de estaciones
+    string estaciones[MAX_ESTACIONES]; // Array para almacenar nombres de estaciones
+    int numEstaciones = 0; // Número actual de estaciones
+
+    // Iterar sobre todas las líneas en la red
+    for (int i = 0; i < numLineas; ++i) {
+        Linea* linea = lineas[i];
+        // Iterar sobre todas las estaciones en la línea actual
+        for (int j = 0; j < linea->numeroEstaciones(); ++j) {
+            Estacion* estacion = linea->obtenerEstacion(j);
+            bool esEstacionNueva = true;
+
+            // Verificar si la estación ya ha sido contada
+            for (int k = 0; k < numEstaciones; ++k) {
+                if (estaciones[k] == estacion->getNombre()) {
+                    esEstacionNueva = false;
+                    break;
+                }
+            }
+
+            // Si la estación es nueva, agregarla al array de estaciones
+            if (esEstacionNueva) {
+                estaciones[numEstaciones++] = estacion->getNombre();
+            }
+        }
+    }
+
+    return numEstaciones; // Devolver el número de estaciones encontradas
+}
+
+

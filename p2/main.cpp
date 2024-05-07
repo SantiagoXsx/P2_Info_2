@@ -14,7 +14,9 @@ int main() {
         cout << "4. Cantidad de lineas en la red\n";
         cout << "5. Verificar si una estacion pertenece a una linea\n";
         cout << "6. Eliminar linea\n";
-        cout << "7. Salir\n";
+        cout << "7. Cantidad de estaciones tiene una linea dada\n";
+        cout << "8. Cantidad de estaciones en la red metro\n";
+        cout << "9. Salir\n";
         cout << "Ingrese su opcion: ";
         cin >> opcion;
 
@@ -110,13 +112,32 @@ int main() {
             break;
         }
         case '7':
+        {
+            string nombreLinea;
+            cout << "Ingrese el nombre de la linea: ";
+            cin >> nombreLinea;
+            int numEstaciones = red.numeroEstacionesEnLinea(nombreLinea);
+            if (numEstaciones != -1) {
+                cout << "La línea " << nombreLinea << " tiene " << numEstaciones << " estaciones." << endl;
+            } else {
+                cout << "La línea especificada no existe." << endl;
+            }
+            break;
+        }
+        case '8':
+        {
+            cout << "Número de estaciones únicas en la red: " << red.numeroEstacionesUnicas() << endl;
+            break;
+        }
+        case '9':
             cout << "Saliendo del programa.\n";
             break;
         default:
             cout << "Opcion invalida. Intente de nuevo.\n";
             break;
         }
-    } while (opcion != '7');
+        
+    } while (opcion != '9');
 
     return 0;
 }

@@ -57,3 +57,14 @@ bool Linea::verificarEstacion(const string& nombreEstacion) const {
     return false;
 }
 
+int Linea::numeroEstaciones() const {
+    return cantidadEstaciones;
+}
+
+Estacion* Linea::obtenerEstacion(int indice) const {
+    if (indice >= 0 && indice < cantidadEstaciones) {
+        return estaciones[indice];
+    } else {
+        return nullptr;
+    }
+}

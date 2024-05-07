@@ -27,7 +27,8 @@ public:
     int numeroEstacionesTransferencia() const;
     void imprimirInformacion() const;
     Linea* obtenerLinea(const string& nombreLinea) const;
-
+    int numeroEstacionesEnLinea(const std::string& nombreLinea) const;
+    int numeroEstacionesUnicas() const;
 };
 
 #endif // REDMETRO_H

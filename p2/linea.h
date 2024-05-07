@@ -37,6 +37,9 @@ public:
     //Método para verificar si una estacion pertenece a una linea
     bool verificarEstacion(const string& nombreEstacion) const;
 
+    int numeroEstaciones() const;
+    
+    Estacion* obtenerEstacion(int indice) const;
 
 
 
