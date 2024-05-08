@@ -26,7 +26,7 @@ public:
     void agregarEstacion(Estacion* estacion);
 
     // Método para eliminar una estación de la línea
-    void eliminarEstacion(Estacion* estacion);
+    void eliminarEstacion(const string& nombreEstacion);
 
     // Método para obtener el nombre de la línea
     string obtenerNombre() const;

@@ -23,9 +23,10 @@ void Linea::agregarEstacion(Estacion* estacion) {
 }
 
 // Método para eliminar una estación de la línea
-void Linea::eliminarEstacion(Estacion* estacion) {
+void Linea::eliminarEstacion(const string& nombreEstacion) {
     for (int i = 0; i < cantidadEstaciones; ++i) {
-        if (estaciones[i] == estacion) {
+        if (estaciones[i]->getNombre() == nombreEstacion) {
+            delete estaciones[i]; // Liberar memoria de la estación eliminada
             // Mover las estaciones restantes una posición hacia atrás
             for (int j = i; j < cantidadEstaciones - 1; ++j) {
                 estaciones[j] = estaciones[j + 1];

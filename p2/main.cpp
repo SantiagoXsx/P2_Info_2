@@ -68,9 +68,8 @@ int main() {
                 string nombreEstacion;
                 cout << "Ingrese el nombre de la estacion que desea eliminar: ";
                 cin >> nombreEstacion;
-                Estacion* estacion = new Estacion(nombreEstacion, 0, 0, false);
                 if (linea->verificarEstacion(nombreEstacion)) {
-                    linea->eliminarEstacion(estacion);
+                    linea->eliminarEstacion(nombreEstacion);
                     cout << "Estacion eliminada de la linea correctamente.\n";
                 } else {
                     cout << "La estacion especificada no pertenece a la linea.\n";
