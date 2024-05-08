@@ -29,6 +29,7 @@ public:
     Linea* obtenerLinea(const string& nombreLinea) const;
     int numeroEstacionesEnLinea(const std::string& nombreLinea) const;
     int numeroEstacionesUnicas() const;
+    int calcularTiempoLlegada(const string& nombreLinea, const string& estacionOrigen, const string& estacionDestino, int horaSalida) const;
 };
 
 #endif // REDMETRO_H

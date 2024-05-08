@@ -16,10 +16,20 @@ RedMetro::~RedMetro() {
 }
 
 void RedMetro::agregarLinea(const string& nombreLinea) {
+    // Verificar si ya existe una línea con el mismo nombre
+    for (int i = 0; i < numLineas; ++i) {
+        if (lineas[i]->obtenerNombre() == nombreLinea) {
+            cout << "Ya existe una linea con el nombre '" << nombreLinea << "'. No se puede agregar una nueva linea con el mismo nombre.\n";
+            return; // Salir del método si ya existe una línea con el mismo nombre
+        }
+    }
+
+    // Si no se encuentra ninguna línea con el mismo nombre, agregar la nueva línea
     if (numLineas < MAX_LINEAS) {
         lineas[numLineas++] = new Linea(nombreLinea, capacidadmaxima);
+        cout << "Linea agregada correctamente.\n";
     } else {
-        std::cout << "No se puede agregar mas lineas. Se alcanzo el limite mximo." << std::endl;
+        cout << "No se puede agregar mas lineas. Se alcanzo el limite máximo.\n";
     }
 }
 
@@ -110,3 +120,44 @@ int RedMetro::numeroEstacionesUnicas() const {
 }
 
 
+int RedMetro::calcularTiempoLlegada(const string& nombreLinea, const string& estacionOrigen, const string& estacionDestino, int horaSalida) const {
+    Linea* linea = obtenerLinea(nombreLinea);
+
+    if (linea == nullptr) {
+        cout << "La linea especificada no existe en la red.\n";
+        return -1;
+    }
+
+    // Verificar si las estaciones existen en la línea especificada
+    if (!linea->verificarEstacion(estacionOrigen) || !linea->verificarEstacion(estacionDestino)) {
+        cout << "Al menos una de las estaciones especificadas no existe en la linea.\n";
+        return -1;
+    }
+
+    // Obtener las estaciones desde la línea
+    Estacion* origen = nullptr;
+    Estacion* destino = nullptr;
+    for (int i = 0; i < linea->numeroEstaciones(); ++i) {
+        Estacion* estacion = linea->obtenerEstacion(i);
+        if (estacion->getNombre() == estacionOrigen) {
+            origen = estacion;
+        }
+        if (estacion->getNombre() == estacionDestino) {
+            destino = estacion;
+        }
+    }
+
+    // Verificar si se encontraron las estaciones
+    if (origen == nullptr || destino == nullptr) {
+        cout << "Error al encontrar las estaciones en la linea.\n";
+        return -1;
+    }
+
+    // Calcular el tiempo de viaje entre las estaciones
+    int tiempoViaje = abs(destino->getTiempoAnterior() - origen->getTiempoAnterior());
+
+    // Calcular el tiempo de llegada sumando el tiempo de viaje al tiempo de salida
+    int tiempoLlegada = horaSalida + tiempoViaje;
+
+    return tiempoLlegada;
+}

@@ -47,12 +47,18 @@ void Linea::eliminarEstacion(const string& nombreEstacion) {
     for (int i = 0; i < cantidadEstaciones; ++i) {
         if (estaciones[i]->getNombre() == nombreEstacion) {
             delete estaciones[i]; // Liberar memoria de la estación eliminada
-            // Mover las estaciones restantes una posición hacia atrás
+            // Ajustar el tiempo de viaje entre estaciones adyacentes
             for (int j = i; j < cantidadEstaciones - 1; ++j) {
+                // Si hay una estación después de la estación eliminada, ajustar el tiempo de viaje
+                if (j + 1 < cantidadEstaciones) {
+                    int nuevoTiempoViaje = estaciones[j + 1]->getTiempoAnterior() + estaciones[j + 1]->getTiempoSiguiente();
+                    estaciones[j]->setTiempoSiguiente(nuevoTiempoViaje);
+                }
+                // Mover las estaciones restantes una posición hacia atrás
                 estaciones[j] = estaciones[j + 1];
             }
             cantidadEstaciones--;
-            break;
+            break;  // Importante salir del bucle después de eliminar la estación
         }
     }
 }

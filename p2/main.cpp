@@ -17,22 +17,20 @@ int main() {
         cout << "7. Cantidad de estaciones tiene una linea dada\n";
         cout << "8. Cantidad de estaciones en la red metro\n";
         cout << "9. Imprimir estaciones de una linea\n";
-        cout << "10. Salir\n";
+        cout << "10. Calcular tiempo de llegada\n";
+        cout << "11. Salir\n";
         cout << "Ingrese su opcion: ";
         cin >> opcion;
 
         switch(opcion) {
-        case 1:
-        {
+        case 1: {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea: ";
             cin >> nombreLinea;
             red.agregarLinea(nombreLinea);
-            cout << "Linea agregada correctamente.\n";
             break;
         }
-        case 2:
-        {
+        case 2: {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea a la que desea agregar la estacion: ";
             cin >> nombreLinea;
@@ -63,8 +61,7 @@ int main() {
             break;
         }
 
-        case 3:
-        {
+        case 3: {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea de la que desea eliminar la estacion: ";
             cin >> nombreLinea;
@@ -87,8 +84,7 @@ int main() {
         case 4:
             cout << "Cantidad de lineas en la red: " << red.numeroLineas() << endl;
             break;
-        case 5:
-        {
+        case 5: {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea: ";
             cin >> nombreLinea;
@@ -107,16 +103,14 @@ int main() {
             }
             break;
         }
-        case 6:
-        {
+        case 6: {
             int indiceLinea;
             cout << "Ingrese el numero de la linea que desea eliminar: ";
             cin >> indiceLinea;
             red.eliminarLinea(indiceLinea - 1);
             break;
         }
-        case 7:
-        {
+        case 7: {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea: ";
             cin >> nombreLinea;
@@ -128,13 +122,11 @@ int main() {
             }
             break;
         }
-        case 8:
-        {
+        case 8: {
             cout << "Numero de estaciones unicas en la red: " << red.numeroEstacionesUnicas() << endl;
             break;
         }
-        case 9:
-        {
+        case 9: {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea que desea imprimir: ";
             cin >> nombreLinea;
@@ -152,18 +144,32 @@ int main() {
             }
             break;
         }
+        case 10: {
+            string nombreLinea, estacionOrigen, estacionDestino;
+            int horaSalida;
+            cout << "Ingrese el nombre de la linea: ";
+            cin >> nombreLinea;
+            cout << "Ingrese la estacion de origen: ";
+            cin >> estacionOrigen;
+            cout << "Ingrese la estacion de destino: ";
+            cin >> estacionDestino;
+            cout << "Ingrese la hora de salida (en horas): ";
+            cin >> horaSalida;
 
-        case 10:
+            int tiempoLlegada = red.calcularTiempoLlegada(nombreLinea, estacionOrigen, estacionDestino, horaSalida);
+            if (tiempoLlegada != -1) {
+                cout << "El tren llegara a la estacion " << estacionDestino << " en " << tiempoLlegada << " horas.\n";
+            }
+            break;
+        }
+        case 11:
             cout << "Saliendo del programa.\n";
             break;
-
         default:
             cout << "Opcion invalida. Intente de nuevo.\n";
             break;
         }
-        
-        
-    } while (opcion != 10);
+    } while (opcion != 11);
 
     return 0;
 }
