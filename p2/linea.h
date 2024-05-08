@@ -23,7 +23,7 @@ public:
     ~Linea();
 
     // Método para agregar una estación al final de la línea
-    void agregarEstacion(Estacion* estacion);
+    void agregarEstacion(Estacion* estacion, int posicion);
 
     // Método para eliminar una estación de la línea
     void eliminarEstacion(const string& nombreEstacion);

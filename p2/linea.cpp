@@ -13,14 +13,34 @@ Linea::~Linea() {
     delete[] estaciones; // Liberar memoria asignada al array de punteros a Estacion
 }
 
-// Método para agregar una estación al final de la línea
-void Linea::agregarEstacion(Estacion* estacion) {
-    if (cantidadEstaciones < capacidadMaxima) {
-        estaciones[cantidadEstaciones++] = estacion;
-    } else {
-        cout << "No se pueden agregar más estaciones. La línea está llena." << endl;
+void Linea::agregarEstacion(Estacion* estacion, int posicion) {
+    if (posicion < 0 || posicion > cantidadEstaciones) {
+        cout << "Posición inválida. La posición debe estar entre 0 y " << cantidadEstaciones << endl;
+        return;
     }
+
+    if (cantidadEstaciones == capacidadMaxima) {
+        cout << "No se pueden agregar más estaciones. La línea está llena." << endl;
+        return;
+    }
+
+    Estacion** nuevasEstaciones = new Estacion*[capacidadMaxima + 1];
+
+    for (int i = 0, j = 0; i <= cantidadEstaciones; ++i) {
+        if (i == posicion) {
+            nuevasEstaciones[i] = estacion;
+        } else {
+            nuevasEstaciones[i] = estaciones[j++];
+        }
+    }
+
+    delete[] estaciones;
+
+    estaciones = nuevasEstaciones;
+
+    cantidadEstaciones++;
 }
+
 
 // Método para eliminar una estación de la línea
 void Linea::eliminarEstacion(const string& nombreEstacion) {

@@ -6,7 +6,7 @@ using namespace std;
 int main() {
     RedMetro red;
 
-    char opcion;
+    int opcion;
     do {
         cout << "1. Agregar linea\n";
         cout << "2. Agregar estacion a una linea existente\n";
@@ -16,12 +16,13 @@ int main() {
         cout << "6. Eliminar linea\n";
         cout << "7. Cantidad de estaciones tiene una linea dada\n";
         cout << "8. Cantidad de estaciones en la red metro\n";
-        cout << "9. Salir\n";
+        cout << "9. Imprimir estaciones de una linea\n";
+        cout << "10. Salir\n";
         cout << "Ingrese su opcion: ";
         cin >> opcion;
 
         switch(opcion) {
-        case '1':
+        case 1:
         {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea: ";
@@ -30,7 +31,7 @@ int main() {
             cout << "Linea agregada correctamente.\n";
             break;
         }
-        case '2':
+        case 2:
         {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea a la que desea agregar la estacion: ";
@@ -40,6 +41,7 @@ int main() {
                 string nombreEstacion;
                 int tiempoAnterior, tiempoSiguiente;
                 bool esTransferencia;
+                int posicion;
 
                 cout << "Ingrese el nombre de la estacion: ";
                 cin >> nombreEstacion;
@@ -49,16 +51,19 @@ int main() {
                 cin >> tiempoSiguiente;
                 cout << "Es una estacion de transferencia? (1: Si / 0: No): ";
                 cin >> esTransferencia;
+                cout << "Ingrese la posición de la estación (entre 0 y " << linea->numeroEstaciones() << "): ";
+                cin >> posicion;
 
                 Estacion* estacion = new Estacion(nombreEstacion, tiempoAnterior, tiempoSiguiente, esTransferencia);
-                linea->agregarEstacion(estacion);
+                linea->agregarEstacion(estacion, posicion);
                 cout << "Estacion agregada a la linea correctamente.\n";
             } else {
                 cout << "La linea especificada no existe.\n";
             }
             break;
         }
-        case '3':
+
+        case 3:
         {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea de la que desea eliminar la estacion: ";
@@ -79,10 +84,10 @@ int main() {
             }
             break;
         }
-        case '4':
+        case 4:
             cout << "Cantidad de lineas en la red: " << red.numeroLineas() << endl;
             break;
-        case '5':
+        case 5:
         {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea: ";
@@ -102,7 +107,7 @@ int main() {
             }
             break;
         }
-        case '6':
+        case 6:
         {
             int indiceLinea;
             cout << "Ingrese el numero de la linea que desea eliminar: ";
@@ -110,7 +115,7 @@ int main() {
             red.eliminarLinea(indiceLinea - 1);
             break;
         }
-        case '7':
+        case 7:
         {
             string nombreLinea;
             cout << "Ingrese el nombre de la linea: ";
@@ -123,20 +128,42 @@ int main() {
             }
             break;
         }
-        case '8':
+        case 8:
         {
             cout << "Número de estaciones únicas en la red: " << red.numeroEstacionesUnicas() << endl;
             break;
         }
-        case '9':
+        case 9:
+        {
+            string nombreLinea;
+            cout << "Ingrese el nombre de la linea que desea imprimir: ";
+            cin >> nombreLinea;
+            Linea* linea = red.obtenerLinea(nombreLinea);
+            if (linea != nullptr) {
+                cout << "Estaciones en la línea " << nombreLinea << ":\n";
+                for (int i = 0; i < linea->numeroEstaciones(); ++i) {
+                    Estacion* estacion = linea->obtenerEstacion(i);
+                    if (estacion != nullptr) {
+                        cout << "Posición " << i << ": " << estacion->getNombre() << endl;
+                    }
+                }
+            } else {
+                cout << "La linea especificada no existe.\n";
+            }
+            break;
+        }
+
+        case 10:
             cout << "Saliendo del programa.\n";
             break;
+
         default:
             cout << "Opcion invalida. Intente de nuevo.\n";
             break;
         }
         
-    } while (opcion != '9');
+        
+    } while (opcion != 10);
 
     return 0;
 }
