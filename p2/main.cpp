@@ -51,7 +51,7 @@ int main() {
                 cin >> tiempoSiguiente;
                 cout << "Es una estacion de transferencia? (1: Si / 0: No): ";
                 cin >> esTransferencia;
-                cout << "Ingrese la posición de la estación (entre 0 y " << linea->numeroEstaciones() << "): ";
+                cout << "Ingrese la posicion de la estacion (entre 0 y " << linea->numeroEstaciones() << "): ";
                 cin >> posicion;
 
                 Estacion* estacion = new Estacion(nombreEstacion, tiempoAnterior, tiempoSiguiente, esTransferencia);
@@ -122,15 +122,15 @@ int main() {
             cin >> nombreLinea;
             int numEstaciones = red.numeroEstacionesEnLinea(nombreLinea);
             if (numEstaciones != -1) {
-                cout << "La línea " << nombreLinea << " tiene " << numEstaciones << " estaciones." << endl;
+                cout << "La linea " << nombreLinea << " tiene " << numEstaciones << " estaciones." << endl;
             } else {
-                cout << "La línea especificada no existe." << endl;
+                cout << "La linea especificada no existe." << endl;
             }
             break;
         }
         case 8:
         {
-            cout << "Número de estaciones únicas en la red: " << red.numeroEstacionesUnicas() << endl;
+            cout << "Numero de estaciones unicas en la red: " << red.numeroEstacionesUnicas() << endl;
             break;
         }
         case 9:
@@ -140,11 +140,11 @@ int main() {
             cin >> nombreLinea;
             Linea* linea = red.obtenerLinea(nombreLinea);
             if (linea != nullptr) {
-                cout << "Estaciones en la línea " << nombreLinea << ":\n";
+                cout << "Estaciones en la linea " << nombreLinea << ":\n";
                 for (int i = 0; i < linea->numeroEstaciones(); ++i) {
                     Estacion* estacion = linea->obtenerEstacion(i);
                     if (estacion != nullptr) {
-                        cout << "Posición " << i << ": " << estacion->getNombre() << endl;
+                        cout << "Posicion " << i << ": " << estacion->getNombre() << endl;
                     }
                 }
             } else {

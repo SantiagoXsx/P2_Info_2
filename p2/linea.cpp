@@ -15,12 +15,12 @@ Linea::~Linea() {
 
 void Linea::agregarEstacion(Estacion* estacion, int posicion) {
     if (posicion < 0 || posicion > cantidadEstaciones) {
-        cout << "Posición inválida. La posición debe estar entre 0 y " << cantidadEstaciones << endl;
+        cout << "Posicion invalida. La posicion debe estar entre 0 y " << cantidadEstaciones << endl;
         return;
     }
 
     if (cantidadEstaciones == capacidadMaxima) {
-        cout << "No se pueden agregar más estaciones. La línea está llena." << endl;
+        cout << "No se pueden agregar mas estaciones. La linea esta llena." << endl;
         return;
     }
 
@@ -52,7 +52,7 @@ void Linea::eliminarEstacion(const string& nombreEstacion) {
                 estaciones[j] = estaciones[j + 1];
             }
             cantidadEstaciones--;
-            break;  // Importante salir del bucle después de eliminar la estación
+            break;
         }
     }
 }
