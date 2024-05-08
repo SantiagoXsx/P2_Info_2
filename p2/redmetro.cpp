@@ -153,11 +153,22 @@ int RedMetro::calcularTiempoLlegada(const string& nombreLinea, const string& est
         return -1;
     }
 
-    // Calcular el tiempo de viaje entre las estaciones
-    int tiempoViaje = abs(destino->getTiempoAnterior() - origen->getTiempoAnterior());
+    // Calcular el tiempo de viaje entre las estaciones, usamos abs para obtener valor absoluto
+    int tiempoViaje = abs(destino->getTiempoAnterior() - origen->getTiempoSiguiente());
 
-    // Calcular el tiempo de llegada sumando el tiempo de viaje al tiempo de salida
-    int tiempoLlegada = horaSalida + tiempoViaje;
+    // Calcular los minutos y segundos adicionales
+    int minutos = tiempoViaje / 60; // Convertir segundos a minutos
+    int segundos = tiempoViaje % 60; // Resto de la división por 60 para obtener los segundos adicionales
 
-    return tiempoLlegada;
+    // Calcular la hora de llegada
+    int horaLlegada = horaSalida + tiempoViaje;
+
+    // Ajustar la hora de llegada si supera las 24 horas
+    horaLlegada %= 24;
+
+    // Mostrar el tiempo de llegada
+    cout << "El tren partira a las " << horaSalida << ":00 y llegara a las " << horaLlegada << ":"
+         << minutos << ":" << segundos << endl;
+
+    return horaLlegada;
 }

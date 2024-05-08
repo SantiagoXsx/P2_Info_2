@@ -153,12 +153,12 @@ int main() {
             cin >> estacionOrigen;
             cout << "Ingrese la estacion de destino: ";
             cin >> estacionDestino;
-            cout << "Ingrese la hora de salida (en horas): ";
+            cout << "Ingrese la hora de salida (HH, formato 24HRS): ";
             cin >> horaSalida;
 
             int tiempoLlegada = red.calcularTiempoLlegada(nombreLinea, estacionOrigen, estacionDestino, horaSalida);
             if (tiempoLlegada != -1) {
-                cout << "El tren llegara a la estacion " << estacionDestino << " en " << tiempoLlegada << " horas.\n";
+                //cout << "El tren llegara a la estacion " << estacionDestino << " en " << tiempoLlegada << " horas.\n";
             }
             break;
         }
