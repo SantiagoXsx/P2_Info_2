@@ -58,7 +58,7 @@ void Linea::eliminarEstacion(const string& nombreEstacion) {
                 estaciones[j] = estaciones[j + 1];
             }
             cantidadEstaciones--;
-            break;  // Importante salir del bucle después de eliminar la estación
+            break;
         }
     }
 }

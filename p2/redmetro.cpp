@@ -137,13 +137,17 @@ int RedMetro::calcularTiempoLlegada(const string& nombreLinea, const string& est
     // Obtener las estaciones desde la línea
     Estacion* origen = nullptr;
     Estacion* destino = nullptr;
+    int posicionOrigen = -1;
+    int posicionDestino = -1;
     for (int i = 0; i < linea->numeroEstaciones(); ++i) {
         Estacion* estacion = linea->obtenerEstacion(i);
         if (estacion->getNombre() == estacionOrigen) {
             origen = estacion;
+            posicionOrigen = i;
         }
         if (estacion->getNombre() == estacionDestino) {
             destino = estacion;
+            posicionDestino = i;
         }
     }
 
@@ -153,8 +157,15 @@ int RedMetro::calcularTiempoLlegada(const string& nombreLinea, const string& est
         return -1;
     }
 
-    // Calcular el tiempo de viaje entre las estaciones, usamos abs para obtener valor absoluto
-    int tiempoViaje = abs(destino->getTiempoAnterior() - origen->getTiempoSiguiente());
+    // Calcular el tiempo de viaje entre las estaciones
+    int tiempoViaje;
+    if (posicionOrigen == posicionDestino - 1) {
+        // Las estaciones están una junto a la otra
+        tiempoViaje = destino->getTiempoSiguiente();
+    } else {
+        // Las estaciones están a una distancia de n estaciones
+        tiempoViaje = origen->getTiempoSiguiente();
+    }
 
     // Calcular los minutos y segundos adicionales
     int minutos = tiempoViaje / 60; // Convertir segundos a minutos
@@ -167,8 +178,7 @@ int RedMetro::calcularTiempoLlegada(const string& nombreLinea, const string& est
     horaLlegada %= 24;
 
     // Mostrar el tiempo de llegada
-    cout << "El tren partira a las " << horaSalida << ":00 y llegara a las " << horaLlegada << ":"
-         << minutos << ":" << segundos << endl;
+    cout << "El tren partira a las " << horaSalida << ":00 y llegara a las " << horaLlegada << ":" << minutos << ":" << segundos << endl;
 
     return horaLlegada;
 }
